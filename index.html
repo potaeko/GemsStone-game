@@ -1,0 +1,241 @@
+<!Doctype html>
+<html lang="en-us">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Infinity stones</title>    
+     <!-- Bootstrap CDN -->
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+   
+ </head>
+
+ <body>
+     <div class="container box">
+      <div class="row text-left"> 
+        <div class="col-md-8 col-sm-8 col-xs-8 purple topmargin">
+       <p>How to play: </p>
+       <br>
+       <p>You will be given a random number at the start of the game.</p>
+       <br>
+       <p>There are four stone below. By clicking on a stone you will <br>add a specific amount of points to your total score.</p>
+       <br>
+       <p>You win the game by matching your total score to random number,<br> you lose the game if your total score goes above the random number.</p>   
+       <br>  
+       <p>The value of each stone is hidden from you until you click on it.</p>
+       <br>
+       <p>Each time when the game starts, the game will change the values of each stone.</p>
+       </div> 
+       </div>
+      <div class="row text-left"> 
+      <div class="col-md-12 col-sm-12 col-xs-12" id=thanos></div>
+      </div> 
+      <div class="row text-left"> 
+      <div class="col-md-4 col-sm-4 col-xs-4 h2">
+      	<h1 id="h1id">Number To Guess: <span id="number-to-guess"></span></h1>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4 h2 text-left">
+        <div class="row">  
+        <h2 id="h2id">Win: <span id="winscore">0</span></h2>
+        </div>
+         <div class="row"> 
+        <h3 id="h3id">Lose: <span id="losescore">0</span></h3></div>
+      </div> 
+      </div>
+     
+    </div>   
+     
+     <div class="container box">
+      <div class="row">            
+       <!--column1-->
+       <div class="col-md-2 col-sm-2 col-xs-2 img-responsive" id=crystal1></div>
+       <!--column2-->
+       <div class="col-md-2 col-sm-2 col-xs-2 img-responsive" id=crystal2></div>
+       <!--column3-->
+       <div class="col-md-2 col-sm-2 col-xs-2 img-responsive" id=crystal3></div>   
+       <!--column4-->
+       <div class="col-md-2 col-sm-2 col-xs-2 img-responsive " id=crystal4></div> 
+      </div> <!--row div-->
+      <div class="row text-left"> 
+        <div class="col-md-4 col-sm-4 col-xs-4 h2">
+      	 <h4 id="h4class" >Your Total Score Is: </h4>
+        </div>
+      </div>
+      <div class="row text-left">
+        <div class="col-md-4 col-sm-4 col-xs-4 h2">
+      	 <span id="sumnumber">0</span>
+        </div>
+       </div> 
+      </div>
+     <div class="container box">
+      <div class="row"> 
+      </div>
+      </div> 
+
+    
+  
+
+
+   <!-- JAVASCRIPT  -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" >
+  $(document).ready(function() {
+  
+   var win=0;
+   var lose=0;
+
+
+
+   //create a string which will hold the number
+   var targetNumber = '';
+   var target=0;
+   var sum=0;
+
+   var random1; 
+   var random2; 
+   var random3;
+   var random4;
+
+    //Add Main image
+    var mainimage= $("<img>");
+    mainimage.addClass("thanosclass");
+    mainimage.attr("src","assets/images/Thanos.jpg");
+   $("#thanos").append(mainimage); 
+
+  
+ 
+ function targetrandom(){
+   //random target value from 19-120
+   targetmin=Math.ceil(19)
+   targetmax=Math.floor(120)
+  
+   var random = Math.floor(Math.random()*(targetmax-targetmin))+targetmin
+   targetNumber=random;
+   target=parseInt(targetNumber);
+
+   //random image value from 1-12
+   imagemin=Math.ceil(1)
+   imagemax=Math.floor(12)
+    
+   random1 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
+   random2 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
+   random3 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
+   random4 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
+   $("#number-to-guess").text(target)
+  
+   console.log(target)
+}  
+  
+
+  function reset(){
+    $("#sumnumber").text(sum)
+    if (sum===target){
+      win++;
+      $("#winscore").text(win)
+      sum=0; 
+      $("#sumnumber").text(sum); 
+      targetrandom();
+  	}
+    else if(sum > target){
+      lose++;
+ 	  $("#losescore").text(lose)
+ 	  sum=0;
+ 	  $("#sumnumber").text(sum);	
+      targetrandom();
+    }};
+
+   // For each iteration, we will create an imageCrystal
+    var imageCrystal1 = $("<img>");
+    var imageCrystal2 = $("<img>");
+    var imageCrystal3 = $("<img>");
+    var imageCrystal4 = $("<img>");
+    
+ 
+
+   //random value imagecrystal1
+   var imagerandomnumber1= '';
+   //add class,image,value to imageCrystal1
+   imageCrystal1.addClass("image1") 
+   imageCrystal1.attr("src","assets/images/amber.jpg");
+   $("#crystal1").append(imageCrystal1); 
+   //add random value to imagecrystal1	
+   $(".image1").on("click",function(){
+    imagerandomnumber1=random1;   
+    image1value=parseInt(imagerandomnumber1); 
+    imageCrystal1.attr("crystal1value",image1value); 
+    console.log(image1value)
+    sum=sum+image1value
+    reset(); 
+    })
+
+    
+  
+    
+    //random value imagecrystal2
+    var imagerandomnumber2= '';
+    //add class,image,value to imageCrystal2
+    imageCrystal2.addClass("image2") 
+    imageCrystal2.attr("src","assets/images/bluezircon.jpg");
+    imageCrystal2.attr("crystal2value", imagerandomnumber2);
+    $("#crystal2").append(imageCrystal2);   
+    $(".image2").on("click",function(){   
+    imagerandomnumber2=random2;
+    image2value=parseInt(imagerandomnumber2);
+    imageCrystal2.attr("crystal2value", image2value); 
+    console.log(image2value)
+    sum=sum+image2value
+    reset(); 
+    })
+    
+   
+    
+    //random value imagecrystal3
+    var imagerandomnumber3= '';
+    //add class,image,value to imageCrystal3
+    imageCrystal3.addClass("image3") 
+    imageCrystal3.attr("src","assets/images/quartz.jpg");
+    imageCrystal3.attr("crystal3value", imagerandomnumber3);
+    $("#crystal3").append(imageCrystal3); 
+    $(".image3").on("click",function(){  
+    imagerandomnumber3=random3;
+    image3value=parseInt(imagerandomnumber3);
+    imageCrystal3.attr("crystal3value", image3value); 
+    console.log(image3value)
+    sum=sum+image3value
+    reset(); 
+    })
+    
+    
+    //random value imagecrystal4
+    var imagerandomnumber4= '';
+    imageCrystal4.addClass("image4") 
+    imageCrystal4.attr("src","assets/images/tanzanite.jpg");
+    imageCrystal4.attr("crystal4value", imagerandomnumber4); 
+    $("#crystal4").append(imageCrystal4);  
+    $(".image4").on("click",function(){  
+    imagerandomnumber4=random4;
+    image4value=parseInt(imagerandomnumber4);
+    imageCrystal4.attr("crystal4value", image4value); 
+    console.log(image4value)
+    sum=sum+image4value
+    reset(); 
+    })
+
+   
+   targetrandom();
+      
+
+
+  })
+ </script>
+ </body>
+</html>
