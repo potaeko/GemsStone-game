@@ -10,6 +10,7 @@
 
       .topmargin{
       margin-top: 50px;
+      margin-left: 15px;
       padding:10px 10px;
       } 
 
@@ -23,7 +24,7 @@
       border: solid 3px purple;
     }
     .thanosclass{
-      width: 67%;
+      width: 68.5%;
       height:30%;
       margin-top: 30px;
       border:solid 3px purple;
