@@ -88,6 +88,9 @@
    <!-- JAVASCRIPT  -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" >
+  // Doesn't make a functional difference, but it's good to get into the habit of 
+  // writing your JavaScript in a different file and then just loading that file 
+  // in instead of writing it inline (this is something you're already doing with css 👌)
   $(document).ready(function() {
   
    var win=0;
@@ -100,11 +103,6 @@
    var target=0;
    var sum=0;
 
-   var random1; 
-   var random2; 
-   var random3;
-   var random4;
-
     //Add Main image
     var mainimage= $("<img>");
     mainimage.addClass("thanosclass");
@@ -115,25 +113,42 @@
  
  function targetrandom(){
    //random target value from 19-120
-   targetmin=Math.ceil(19)
-   targetmax=Math.floor(120)
-  
-   var random = Math.floor(Math.random()*(targetmax-targetmin))+targetmin
-   targetNumber=random;
+   // The `Math.ceil` and `Math.floor` calls are unnecessary here since when they're
+   // used on whole integers they'll simply return that whole integer.
+   targetmin=19
+   targetmax=120
+    
+    // since this variable is only being used to assign a random value to `targetNumber`
+    // I'd suggest just getting rid of this declaration and instead directly assigning 
+    // the random output to `targetNumber`.
+    // Also, since there are a number of places where you're generating a random
+    // number, I think it's a good candidate to be moved into its own function
+
+   // var random = Math.floor(Math.random()*(targetmax-targetmin))+targetmin
+
+   targetNumber = getRandomNumber(targetmax, targetmin);
    target=parseInt(targetNumber);
 
    //random image value from 1-12
-   imagemin=Math.ceil(1)
-   imagemax=Math.floor(12)
+   // The `Math.ceil` and `Math.floor` calls are unnecessary here since when they're
+   // used on whole integers they'll simply return that whole integer.
+   imagemin= 1
+   imagemax= 12
     
-   random1 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
-   random2 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
-   random3 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
-   random4 =Math.floor(Math.random()*(imagemax-imagemin))+imagemin
+    crystals.forEach(function( crystal ) {
+      crystal.randomVal = getRandomNumber(imagemax, imagemin)
+    })
+
    $("#number-to-guess").text(target)
   
-   console.log(target)
-}  
+    // console.log's are awesome for validating your work when developing a program
+    // but it's generally best practice to remove them from production code
+   // console.log(target)
+ }
+
+ function getRandomNumber (max, min) {
+  return Math.floor(Math.random() * (max - min)) + min
+ }
   
 
   function reset(){
@@ -147,93 +162,74 @@
   	}
     else if(sum > target){
       lose++;
- 	  $("#losescore").text(lose)
- 	  sum=0;
- 	  $("#sumnumber").text(sum);	
+      // pretty knitpicky, but keeping your indentation consistent
+      // is a small upfront cost that pays dividends towards 
+      // code maintainability.
+   	  $("#losescore").text(lose)
+   	  sum=0;
+   	  $("#sumnumber").text(sum);	
       targetrandom();
-    }};
+    }
+  };
 
-   // For each iteration, we will create an imageCrystal
-    var imageCrystal1 = $("<img>");
-    var imageCrystal2 = $("<img>");
-    var imageCrystal3 = $("<img>");
-    var imageCrystal4 = $("<img>");
-    
- 
 
-   //random value imagecrystal1
-   var imagerandomnumber1= '';
-   //add class,image,value to imageCrystal1
-   imageCrystal1.addClass("image1") 
-   imageCrystal1.attr("src","assets/images/amber.jpg");
-   $("#crystal1").append(imageCrystal1); 
-   //add random value to imagecrystal1	
-   $(".image1").on("click",function(){
-    imagerandomnumber1=random1;   
-    image1value=parseInt(imagerandomnumber1); 
-    imageCrystal1.attr("crystal1value",image1value); 
-    console.log(image1value)
-    sum=sum+image1value
-    reset(); 
-    })
-
-    
-  
-    
-    //random value imagecrystal2
-    var imagerandomnumber2= '';
-    //add class,image,value to imageCrystal2
-    imageCrystal2.addClass("image2") 
-    imageCrystal2.attr("src","assets/images/bluezircon.jpg");
-    imageCrystal2.attr("crystal2value", imagerandomnumber2);
-    $("#crystal2").append(imageCrystal2);   
-    $(".image2").on("click",function(){   
-    imagerandomnumber2=random2;
-    image2value=parseInt(imagerandomnumber2);
-    imageCrystal2.attr("crystal2value", image2value); 
-    console.log(image2value)
-    sum=sum+image2value
-    reset(); 
-    })
-    
-   
-    
-    //random value imagecrystal3
-    var imagerandomnumber3= '';
-    //add class,image,value to imageCrystal3
-    imageCrystal3.addClass("image3") 
-    imageCrystal3.attr("src","assets/images/quartz.jpg");
-    imageCrystal3.attr("crystal3value", imagerandomnumber3);
-    $("#crystal3").append(imageCrystal3); 
-    $(".image3").on("click",function(){  
-    imagerandomnumber3=random3;
-    image3value=parseInt(imagerandomnumber3);
-    imageCrystal3.attr("crystal3value", image3value); 
-    console.log(image3value)
-    sum=sum+image3value
-    reset(); 
-    })
-    
-    
-    //random value imagecrystal4
-    var imagerandomnumber4= '';
-    imageCrystal4.addClass("image4") 
-    imageCrystal4.attr("src","assets/images/tanzanite.jpg");
-    imageCrystal4.attr("crystal4value", imagerandomnumber4); 
-    $("#crystal4").append(imageCrystal4);  
-    $(".image4").on("click",function(){  
-    imagerandomnumber4=random4;
-    image4value=parseInt(imagerandomnumber4);
-    imageCrystal4.attr("crystal4value", image4value); 
-    console.log(image4value)
-    sum=sum+image4value
-    reset(); 
-    })
-
+    var crystals = [
+      {
+        randomVal: null,
+        imageUrl: 'assets/images/amber.jpg',
+        className: 'image1',
+        elementId: '#crystal1',
+        element: $("<img>")
+      },
+      {
+        randomVal: null,
+        imageUrl: 'assets/images/bluezircon.jpg',
+        className: 'image2',
+        elementId: '#crystal2',
+        element: $("<img>")
+      },
+      {
+        randomVal: null,
+        imageUrl: 'assets/images/quartz.jpg',
+        className: 'image3',
+        elementId: '#crystal3',
+        element: $("<img>")
+      },
+      {
+        randomVal: null,
+        imageUrl: 'assets/images/tanzanite.jpg',
+        className: 'image4',
+        elementId: '#crystal4',
+        element: $("<img>")
+      },
+    ]
    
    targetrandom();
-      
+    
 
+    // Last suggestion I'd make is around DRY-ing up your code.
+    // All of the image creation and listener assignment code 
+    // is fairly repetitive and you can trim it down a good bit
+    // by storing the information for each crystal in an object 
+    // and store each of those objects in the crystals array above.
+    // Then you can dynamically generate any number of crystals that
+    // you put into that array using the below function:
+
+    crystals.forEach( generateCrystal )
+
+    function generateCrystal (crystal) {
+
+      crystal.element.addClass(crystal.className) 
+      crystal.element.attr("src", crystal.imageUrl);
+
+      $(crystal.elementId).append(crystal.element);
+
+      $('.' + crystal.className).on("click", function(){  
+        sum += crystal.randomVal
+        reset()
+      })
+
+    }
 
   })
  </script>
