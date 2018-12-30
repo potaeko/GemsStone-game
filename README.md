@@ -1,5 +1,7 @@
-#GemsStone-game</br>
-#Create Game with HTML,CSS,jQeury,Javascript</br>
+#GemsStone-Game</br>
+
+#Create Game with HTML, CSS, jQeury, Javascript</br>
+
 How to play:<br>
 You will be given a random number<br>
 There are four stones below. 
