@@ -1,6 +1,6 @@
-#GemsStone-Game</br>
+GemsStone-Game</br>
 
-#Create Game with HTML, CSS, jQeury, Javascript</br>
+Create Game with HTML, CSS, jQeury, Javascript</br>
 
 How to play:<br>
 You will be given a random number to match.<br>
