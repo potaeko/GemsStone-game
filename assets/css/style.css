@@ -1,66 +1,79 @@
+body {
+  background-color: black;
+  background-image: url("../images/spacewall.jpg")
+}
 
-      body{background-color: black;
-      background-image:url("../images/spacewall.jpg")
-      }
+p {
+  color: white;
+  font-size: 1px;
+  text-align: center;
+}
 
-      p{
-        color:white;
-        font-size: 1px;
-       }
+.container {
+  display: block;
+  margin: auto;
+  padding: auto;
+}
 
-      .topmargin{
-      margin-top: 50px;
-      margin-left: 15px;
-      padding:10px 10px;
-      } 
+.row {
+  display: block;
 
-      .purple{  
-        background-color: purple;
-      }
+}
 
-    .image1,.image2,.image3,.image4 {
-      width: 100%;
-      height: 100%;
-      border: solid 3px purple;
-    }
-    .thanosclass{
-      width: 68.5%;
-      height:30%;
-      margin-top: 30px;
-      border:solid 3px purple;
-    }
-  
-   
-    #h1id{
-      color:gold;
-      padding-bottom: 60px;
-      background-color: black;
-    }
+.topmargin {
+  margin-top: 50px;
+  margin-left: 15px;
+  padding: 10px 10px;
+}
 
-    #h2id,#h3id{
-      color:red;
-      padding-bottom: 13px;
-      background-color: black;
-    }
+.image1,
+.image2,
+.image3,
+.image4 {
+  width: 100%;
+  height: 100%;
+  border: solid 3px purple;
+}
 
-    
-    #h4class{
-      color:gold;
-      margin-bottom: 0px;
-      background-color:purple;
-    }
+.thanosclass {
+  width: 50%;
+  height: 30%;
+  margin-top: 10px;
+  border: solid 3px purple;
+  display: block;
+}
 
-    .marginbottom{
-      margin-bottom: 30px;
-    }
 
-    #sumnumber{
-      color:gold;
-      display: block;
-      padding-right: 95%;
-      padding-bottom: 100px;
-      margin-bottom: 100px;
-      background-color:black;  
-    }
+#guess-box {
+  color: rgb(240, 220, 6);
+  padding-bottom: 60px;
+  background-color: black;
+  text-align: center;
+  display: block;
+}
 
-  
+#score-box {
+  color: rgb(240, 220, 6);
+  padding-bottom: 35px;
+  background-color: black;
+  text-align: center;
+  display: block;
+}
+
+
+#sum-box {
+  color: rgb(240, 220, 6);
+  background-color: purple;
+}
+
+
+#sum-number {
+  color: rgb(240, 220, 6);
+  display: block;
+  font-size: 80px;
+  text-align: center;
+  padding-right: 95%;
+  padding-bottom: 100px;
+  margin-bottom: 100px;
+  background-color: black;
+}
