@@ -4,7 +4,7 @@
 
 How to play:<br>
 You will be given a random number<br>
-There are four stones below. 
+There are four stones.</br> 
 By clicking on a stone you will add a specific amount of points to your total score.<br>
 You win the game by matching your total score to random number,<br> 
 you lose the game if your total score goes above the random number.<br> 
